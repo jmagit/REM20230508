@@ -1,5 +1,5 @@
 import { Component, OnInit, Optional } from '@angular/core';
-import { ERROR_LEVEL, LoggerService } from 'src/lib/my-core';
+import { ERROR_LEVEL, LoggerService } from '@my/core';
 import { NotificationService, NotificationType } from './common-services';
 
 @Component({
@@ -20,6 +20,6 @@ export class AppComponent implements OnInit {
   constructor(private notify: NotificationService) {}
 
   ngOnInit(): void {
-    this.notify.add('Inicio la aplicación', NotificationType.info)
+    // this.notify.add('Inicio la aplicación', NotificationType.info)
   }
 }
