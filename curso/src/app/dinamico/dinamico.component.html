@@ -1,1 +1,9 @@
-<p>dinamico works!</p>
+<header>
+  <nav>
+    <button *ngFor="let item of menu; let indice=index; " type="button" (click)="seleccionar(indice)">{{item.texto}}</button>
+  </nav>
+</header>
+<app-notification />
+<main class="container-fluid">
+  <ng-container *ngComponentOutlet="seleccionado" />
+</main>
