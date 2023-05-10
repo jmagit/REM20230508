@@ -5,7 +5,8 @@ import { Unsubscribable } from 'rxjs';
 @Component({
   selector: 'app-demos',
   templateUrl: './demos.component.html',
-  styleUrls: ['./demos.component.css']
+  styleUrls: ['./demos.component.css'],
+  providers: [ NotificationService ],
 })
 export class DemosComponent implements OnInit, OnDestroy {
   private suscriptor: Unsubscribable | undefined;
@@ -59,15 +60,32 @@ export class DemosComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.suscriptor = this.vm.Notificacion.subscribe(n => {
-      // if (n.Type !== NotificationType.error) { return; }
-      // window.alert(`Suscripción: ${n.Message}`);
-      // this.vm.remove(this.vm.Listado.length - 1);
+      if (n.Type !== NotificationType.error) { return; }
+      window.alert(`Suscripción: ${n.Message}`);
+      this.vm.remove(this.vm.Listado.length - 1);
     });
   }
   ngOnDestroy(): void {
     if (this.suscriptor) {
       this.suscriptor.unsubscribe();
     }
+  }
+
+  idiomas = [
+    { codigo: 'en-US', region: 'USA' },
+    { codigo: 'es', region: 'España' },
+    { codigo: 'pt', region: 'Portugal' },
+  ];
+  idioma = this.idiomas[0].codigo;
+  calculos: any[] = [];
+  valCalculadora = 666;
+
+  ponResultado(origen: string, valor: any) {
+    this.calculos.push({
+      pos: this.calculos.length + 1,
+      origen,
+      valor
+    });
   }
 
 }

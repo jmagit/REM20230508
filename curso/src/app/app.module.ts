@@ -1,4 +1,9 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
+import { DATE_PIPE_DEFAULT_OPTIONS, registerLocaleData } from '@angular/common';
+import localeEs from '@angular/common/locales/es';
+import localeEsExtra from '@angular/common/locales/extra/es';
+registerLocaleData(localeEs, 'es', localeEsExtra);
+
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -12,12 +17,14 @@ import { CommonServicesModule } from './common-services';
 import { DemosComponent } from './demos/demos.component';
 import GraficoSvgComponent from './grafico-svg/grafico-svg.component';
 import { DinamicoComponent } from './dinamico/dinamico.component';
+import { CalculadoraComponent } from './calculadora/calculadora.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DemosComponent,
     DinamicoComponent,
+    CalculadoraComponent,
   ],
   imports: [
     BrowserModule, FormsModule,
@@ -27,6 +34,8 @@ import { DinamicoComponent } from './dinamico/dinamico.component';
   providers: [
     LoggerService,
     { provide: ERROR_LEVEL, useValue: environment.ERROR_LEVEL},
+    { provide: LOCALE_ID, useValue: 'es-ES' },
+    { provide: DATE_PIPE_DEFAULT_OPTIONS, useValue: { dateFormat: 'dd/MMMM/yy' } },
   ],
   bootstrap: [AppComponent]
 })

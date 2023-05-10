@@ -1,9 +1,23 @@
 <header>
-  <nav>
-    <button *ngFor="let item of menu; let indice=index; " type="button" (click)="seleccionar(indice)">{{item.texto}}</button>
-  </nav>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" (click)="seleccionar(0)"><img src="assets/logo.png" alt="Logotipo corporativo" height="60"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li *ngFor="let item of menu; let indice=index;" class="nav-item">
+              <button class="btn btn-link nav-link" [class.active]="item.componente === seleccionado" type="button"
+                (click)="seleccionar(indice)"><i class="{{item.icono}}"></i> {{item.texto}}</button>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- <app-login></app-login> -->
+    </nav>
 </header>
-<app-notification />
+<app-notification-modal />
 <main class="container-fluid">
   <ng-container *ngComponentOutlet="seleccionado" />
 </main>

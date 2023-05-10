@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { HomeComponent } from '../main';
 import { DemosComponent } from '../demos/demos.component';
+import GraficoSvgComponent from '../grafico-svg/grafico-svg.component';
+import { CalculadoraComponent } from '../calculadora/calculadora.component';
 
 @Component({
   selector: 'app-dinamico',
@@ -9,10 +11,13 @@ import { DemosComponent } from '../demos/demos.component';
 })
 export class DinamicoComponent {
   menu = [
-    { texto: 'demos', icono: '', componente: DemosComponent },
-    { texto: 'inicio', icono: '', componente: HomeComponent},
+    { texto: 'demos', icono: 'fa-solid fa-chalkboard-user', componente: DemosComponent },
+    { texto: 'inicio', icono: 'fa-solid fa-house', componente: HomeComponent},
+    { texto: 'gráfico', icono: 'fa-solid fa-image', componente: GraficoSvgComponent},
+    { texto: 'calculadora', icono: 'fa-solid fa-calculator', componente: CalculadoraComponent},
   ]
-  seleccionado = this.menu[0].componente
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  seleccionado: any = this.menu[0].componente
 
   seleccionar(index: number) {
     this.seleccionado = this.menu[index].componente

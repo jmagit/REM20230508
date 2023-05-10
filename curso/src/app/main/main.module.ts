@@ -3,17 +3,19 @@ import { CommonModule } from '@angular/common';
 import { NotificationComponent } from './notification/notification.component';
 import { NotificationModalComponent } from './notification-modal/notification-modal.component';
 import { HomeComponent } from './home/home.component';
+import { AjaxWaitComponent } from './ajax-wait';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
   declarations: [
-    NotificationComponent, NotificationModalComponent, HomeComponent,
+    NotificationComponent, NotificationModalComponent, HomeComponent, AjaxWaitComponent,
   ],
   exports: [
-    NotificationComponent, NotificationModalComponent, HomeComponent,
+    NotificationComponent, NotificationModalComponent, HomeComponent, AjaxWaitComponent,
   ],
   imports: [
-    CommonModule
+    CommonModule, RouterModule.forChild([]),
   ]
 })
 export class MainModule {
