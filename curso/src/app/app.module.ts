@@ -5,20 +5,22 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { MainModule } from './main';
-import { SecurityModule } from './security';
+// import { SecurityModule } from './security';
 import { ERROR_LEVEL, LoggerService, MyCoreModule } from 'src/lib/my-core';
 import { environment } from 'src/environments/environment';
 import { CommonServicesModule } from './common-services';
 import { DemosComponent } from './demos/demos.component';
+import GraficoSvgComponent from './grafico-svg/grafico-svg.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DemosComponent
+    DemosComponent,
   ],
   imports: [
     BrowserModule, FormsModule,
-    AppRoutingModule, MainModule, SecurityModule, MyCoreModule, CommonServicesModule,
+    AppRoutingModule, MainModule, /*SecurityModule,*/ MyCoreModule, CommonServicesModule,
+    GraficoSvgComponent,
   ],
   providers: [
     LoggerService,
