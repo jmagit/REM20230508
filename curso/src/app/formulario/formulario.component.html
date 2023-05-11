@@ -31,9 +31,8 @@
     <input type="text" id="nif" name="nif" [(ngModel)]="elemento.nif" #nif="ngModel">
     <br>
     <label for="email">Correo:</label>
-    <input type="email" id="email" name="email" [(ngModel)]="elemento.email" #email="ngModel">
-    <output class="error" [hidden]="!email.hasError('email')">Debe tener entre 16 y
-      67 años</output>
+    <input type="email" id="email" name="email" [(ngModel)]="elemento.email" #email="ngModel" email>
+    <output class="error" [hidden]="!email.hasError('email')">No es un correo valido</output>
   </p>
   <p>
     <input type="button" value="Enviar" (click)="send()" [disabled]="miFom.invalid">

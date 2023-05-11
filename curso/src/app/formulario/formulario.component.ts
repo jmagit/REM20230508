@@ -11,7 +11,7 @@ export class FormularioComponent {
 
   add() {
     this.modo = 'add'
-    this.elemento = { id: 0, nombre: '', apellidos: '', edad: null, nif: '', email: ''}
+    this.elemento = { id: null, nombre: '', apellidos: '', edad: null, nif: '', email: ''}
   }
   edit() {
     this.modo = 'edit'
