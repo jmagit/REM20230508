@@ -10,7 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { AjaxWaitInterceptor, MainModule } from './main';
-// import { SecurityModule } from './security';
+import { AuthInterceptor, SecurityModule } from './security';
 import { ERROR_LEVEL, LoggerService, MyCoreModule } from 'src/lib/my-core';
 import { environment } from 'src/environments/environment';
 import { CommonServicesModule } from './common-services';
@@ -21,6 +21,7 @@ import { CalculadoraComponent } from './calculadora/calculadora.component';
 import { FormularioComponent } from './formulario/formulario.component';
 import { CommonComponentModule } from './common-component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { ContactosModule } from './contactos';
 
 @NgModule({
   declarations: [
@@ -32,8 +33,9 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
   ],
   imports: [
     BrowserModule, FormsModule, HttpClientModule,
-    AppRoutingModule, MainModule, /*SecurityModule,*/ MyCoreModule, CommonServicesModule, CommonComponentModule,
-    GraficoSvgComponent,
+    AppRoutingModule, MainModule, SecurityModule, MyCoreModule, CommonServicesModule, CommonComponentModule,
+    ContactosModule,
+    GraficoSvgComponent
   ],
   providers: [
     LoggerService,
@@ -41,6 +43,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
     { provide: LOCALE_ID, useValue: 'es-ES' },
     { provide: DATE_PIPE_DEFAULT_OPTIONS, useValue: { dateFormat: 'dd/MMM/yy' } },
     { provide: HTTP_INTERCEPTORS, useClass: AjaxWaitInterceptor, multi: true, },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true, },
   ],
   bootstrap: [AppComponent]
 })
