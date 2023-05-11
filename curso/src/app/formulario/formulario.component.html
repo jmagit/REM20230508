@@ -1,0 +1,35 @@
+<p>
+  <input type="button" value="nuevo" (click)="add()" >
+  <input type="button" value="editar" (click)="edit()" >
+
+</p>
+<form #miFom="ngForm">
+  <p>
+    <label for="id">Código:</label>
+    <input type="number" id="id" name="id" [(ngModel)]="elemento.id" #id="ngModel"
+      required>
+    <br>
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" name="nombre" [(ngModel)]="elemento.nombre" #nombre="ngModel"
+      required maxlength="10" minlength="2">
+    <br>
+    <label for="apellidos">Apellidos:</label>
+    <input type="text" id="apellidos" name="apellidos" [(ngModel)]="elemento.apellidos" #apellidos="ngModel"
+      maxlength="10" minlength="2">
+    <br>
+    <label for="edad">Edad:</label>
+    <input type="number" id="edad" name="edad" [(ngModel)]="elemento.edad" #edad="ngModel"
+      min="16" max="67">
+    <br>
+    <label for="nif">Nif:</label>
+    <input type="text" id="nif" name="nif" [(ngModel)]="elemento.nif" #nif="ngModel">
+    <br>
+    <label for="email">Correo:</label>
+    <input type="email" id="email" name="email" [(ngModel)]="elemento.email" #email="ngModel">
+  </p>
+  <p>
+    <input type="button" value="Enviar" (click)="send()" [disabled]="miFom.invalid" >
+    <input type="button" value="Volver" >
+  </p>
+</form>
+{{ elemento | json }}
