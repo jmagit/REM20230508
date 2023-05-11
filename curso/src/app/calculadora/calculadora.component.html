@@ -1,4 +1,5 @@
-<div class="Calculadora">
+<!-- eslint-disable @angular-eslint/template/interactive-supports-focus -->
+<div class="Calculadora" (keydown)="handleKeyDown($event)">
   <output class="Resumen"><ng-container *ngIf="SeparadorDecimal === ','; then ResumenComa; else ResumenPunto;"></ng-container></output>
   <output class="Pantalla"><ng-container *ngIf="SeparadorDecimal === ','; then PantallaComa; else PantallaPunto;"></ng-container></output>
   <input class="btnOperar col-1x2" type="button" value="C" (click)="inicia()">

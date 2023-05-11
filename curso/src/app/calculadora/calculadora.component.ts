@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { LoggerService } from '@my/core';
 import { NotificationService, NotificationType } from '../common-services';
+import { environment } from 'src/environments/environment';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -145,5 +146,19 @@ export class CalculadoraComponent implements OnInit {
     }
   }
 
+  handleKeyDown(ev: KeyboardEvent) {
+    if ('0' <= ev.key && ev.key <= '9')
+      this.ponDigito(ev.key)
+    else if ('+-*/='.indexOf(ev.key) >= 0)
+      this.calcula(ev.key)
+    else
+    switch (ev.key.toLowerCase()) {
+      case '.': if (this.SeparadorDecimal === '.') this.ponComa();  break;
+      case ',': if (this.SeparadorDecimal === '.') this.ponComa();  break;
+      case 'backspace': this.borrar(); break;
+      case 'c': this.inicia(); break;
+    }
+    if (!environment.production)  console.log(`Tecla: ${ev.key}`)
+  }
 }
 
