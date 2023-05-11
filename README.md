@@ -9,3 +9,9 @@
 - [Spanish - Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker-spanish)
 - [IntelliSense for CSS class names](https://marketplace.visualstudio.com/items?itemName=Zignd.html-css-class-completion)
 - [Path Intellisense](https://marketplace.visualstudio.com/items?itemName=christian-kohler.path-intellisense)
+
+## Servidor REST
+    git clone https://github.com/jmagit/MOCKWebServer.git MOCKWebServer
+    cd MOCKWebServer
+    npm i
+    npm start

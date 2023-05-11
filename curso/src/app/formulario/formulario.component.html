@@ -32,7 +32,7 @@
       67 años</output>
     <br>
     <label for="nif">Nif:</label>
-    <input type="text" id="nif" name="nif" [(ngModel)]="elemento.nif" #nif="ngModel" nif>
+    <input type="text" id="nif" name="nif" [(ngModel)]="elemento.nif" #nif="ngModel" nif mayusculas>
     <output class="error" [hidden]="nif.valid">{{nif.errors | errormsg}}</output>
     <br>
     <label for="email">Correo:</label>
