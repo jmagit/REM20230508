@@ -11,15 +11,19 @@
     <br>
     <label for="nombre">Nombre:</label>
     <input type="text" id="nombre" name="nombre" [(ngModel)]="elemento.nombre" #nombre="ngModel" required maxlength="10"
-      minlength="2">
-    <output class="error" [hidden]="!nombre?.errors?.['required']">Es obligatorio</output>
+      minlength="2" mayusculas>
+    <!-- <output class="error" [hidden]="!nombre?.errors?.['required']">Es obligatorio</output>
     <output class="error" [hidden]="!nombre.hasError('minlength') && !nombre.hasError('maxlength')">Debe tener entre 2 y
       10 letras</output>
+    <output class="error" [hidden]="!nombre?.errors?.['mayusculas']">No está en mayúsculas</output> -->
+    <app-show-errors-messages [errors]="nombre?.errors" />
+    <!-- {{nombre?.errors | json}} -->
     <br>
     <label for="apellidos">Apellidos:</label>
     <input type="text" id="apellidos" name="apellidos" [(ngModel)]="elemento.apellidos" #apellidos="ngModel"
       maxlength="10" minlength="2">
-    <output class="error" [hidden]="!apellidos.hasError('minlength') && !apellidos.hasError('maxlength')">Debe tener entre 2 y
+    <output class="error" [hidden]="!apellidos.hasError('minlength') && !apellidos.hasError('maxlength')">Debe tener
+      entre 2 y
       10 letras</output>
     <br>
     <label for="edad">Edad:</label>
@@ -28,15 +32,17 @@
       67 años</output>
     <br>
     <label for="nif">Nif:</label>
-    <input type="text" id="nif" name="nif" [(ngModel)]="elemento.nif" #nif="ngModel">
+    <input type="text" id="nif" name="nif" [(ngModel)]="elemento.nif" #nif="ngModel" nif>
+    <output class="error" [hidden]="nif.valid">{{nif.errors | errormsg}}</output>
     <br>
     <label for="email">Correo:</label>
-    <input type="email" id="email" name="email" [(ngModel)]="elemento.email" #email="ngModel" email>
-    <output class="error" [hidden]="!email.hasError('email')">No es un correo valido</output>
+    <input type="email" id="email" name="email" [(ngModel)]="elemento.email" #email="ngModel">
+    <output class="error" [hidden]="!email.hasError('type')">{{email.getError('type')}}</output>
   </p>
   <p>
     <input type="button" value="Enviar" (click)="send()" [disabled]="miFom.invalid">
-    <input type="button" value="Volver">
+    <input type="button" value="Volver" (click)="cancel()">
   </p>
+ <app-form-buttons [send-text]="'enviar'" (send)="send()" [send-disabled]="miFom.invalid" [cancel-text]="'volver'" (cancel)="cancel()" />
 </form>
 {{ elemento | json }}

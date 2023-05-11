@@ -21,4 +21,7 @@ export class FormularioComponent {
   send() {
     alert(`${this.modo}: ${JSON.stringify(this.elemento)}`)
   }
+  cancel() {
+    alert(`cancelado`)
+  }
 }
