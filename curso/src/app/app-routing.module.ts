@@ -43,7 +43,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { bindToComponentInputs: true })], // para activar la vinculación como entradas de componentes
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
