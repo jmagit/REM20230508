@@ -48,6 +48,12 @@ describe('Pruebas aisladas de la calculadora', () => {
 				expect(calc.Pantalla).toBe(digito.toString())
 			})
 		}
+		['22', '-1'].forEach(digito => {
+			it(`ponDigito ${digito} como error`, () => {
+				calc.ponDigito(digito)
+				expect(calc.Pantalla).toBe('0')
+			})
+		});
 		['1234567890', '9876543210', '666'].forEach(caso => {
 			it(`Secuencia ${caso}`, () => {
 				caso.split('').forEach(digito => calc.ponDigito(digito));
@@ -151,7 +157,7 @@ describe('Pruebas aisladas de la calculadora', () => {
 		});
 
 		describe('Calcula sumas', function () {
-			[[22222, 22222, 44444], [-1, 2, 1], [2, -1, 1], [0, 0, 0],
+			[[22222, 22222, 44444], [-1, 2, 1], [2, -1, 1], [-1, -1, -2], [0, 0, 0],
 			[0.1, 0.2, 0.3], [9.9, 1.3, 11.2]].forEach(caso => {
 				it(`Suma: ${caso[0]} + ${caso[1]} = ${caso[2]}`, function () {
 					calc.ponOperando(caso[0])
@@ -244,15 +250,15 @@ describe('CalculadoraComponent', () => {
   });
 
   it('cálculos', () => {
-    const tag: HTMLElement = fixture.debugElement.query(By.css('.Pantalla')).nativeElement;
-    expect(tag.textContent?.trim()).toBe('0')
+    const pantalla: HTMLElement = fixture.debugElement.query(By.css('.Pantalla')).nativeElement;
+    expect(pantalla.textContent?.trim()).toBe('0')
     component.ponOperando(123)
     expect(component.Pantalla).toBe('123')
     fixture.detectChanges()
-    expect(tag.textContent?.trim()).toBe('123')
+    expect(pantalla.textContent?.trim()).toBe('123')
     fixture.debugElement.query(By.css('[value="7"]')).triggerEventHandler('click', null);
     fixture.detectChanges()
-    expect(tag.textContent?.trim()).toBe('1237')
+    expect(pantalla.textContent?.trim()).toBe('1237')
     fixture.debugElement.query(By.css('[value="."]')).triggerEventHandler('click', null);
     fixture.debugElement.query(By.css('[value="."]')).triggerEventHandler('click', null);
     expect(notify.add).toHaveBeenCalled();
