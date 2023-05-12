@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@
 import { LoggerService } from '@my/core';
 import { NotificationService, NotificationType } from '../common-services';
 import { environment } from 'src/environments/environment';
+import { OnChanges } from '@angular/core';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -9,7 +10,7 @@ import { environment } from 'src/environments/environment';
   templateUrl: './calculadora.component.html',
   styleUrls: ['./calculadora.component.css']
 })
-export class CalculadoraComponent implements OnInit {
+export class CalculadoraComponent implements OnInit, OnChanges {
   public readonly Math = Math;
 
   private acumulado = 0;
@@ -31,14 +32,14 @@ export class CalculadoraComponent implements OnInit {
   get Resumen(): string { return this.miResumen; }
 
   @Input() init: string | number = '0';
-  @Output() updated: EventEmitter<any> = new EventEmitter();
+  @Output() updated: EventEmitter<number> = new EventEmitter();
 
   private separadorDecimal = '.';
   get SeparadorDecimal() { return this.separadorDecimal; }
   @Input() set SeparadorDecimal(value: string) {
     if (value !== this.separadorDecimal && (value === '.' || value === ',')) {
       this.separadorDecimal = value;
-    } else {
+    } else if (value) {
       this.log.error('Separador decimal no reconocido.');
     }
   }
@@ -140,6 +141,7 @@ export class CalculadoraComponent implements OnInit {
     //   this.ponOperando(this.init);
     // }
   }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   ngOnChanges(_changes: SimpleChanges): void {
     if (this.init) {
       this.ponOperando(this.init.toString());
