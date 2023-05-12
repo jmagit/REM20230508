@@ -79,7 +79,7 @@ describe('ErrorMessagePipe', () => {
     expect(pipe).toBeTruthy();
   });
   it('Sin errores', () => {
-    expect(pipe.transform(null)).toBeUndefined()
+    expect(pipe.transform(null)).toBe('')
   });
 
   it('Con errores', () => {

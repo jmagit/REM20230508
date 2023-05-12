@@ -17,7 +17,13 @@ import { CommonComponentModule } from '../common-component';
     LibrosComponent,
   ],
   imports: [
-    CommonModule, FormsModule, RouterModule.forChild([]),
+    CommonModule, FormsModule, RouterModule.forChild([
+      { path: '', component: LibrosComponent },
+      { path: 'add', component: LibrosComponent },
+      { path: ':id/edit', component: LibrosComponent },
+      { path: ':id', component: LibrosComponent },
+      { path: ':id/:kk', component: LibrosComponent },
+    ]),
     MyCoreModule, CommonServicesModule,
     PaginatorModule, CommonComponentModule, MyCoreModule,
   ]

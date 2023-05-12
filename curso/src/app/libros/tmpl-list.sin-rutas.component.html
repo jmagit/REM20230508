@@ -9,24 +9,14 @@
   <tbody>
     <tr *ngFor="let item of VM.Listado">
       <td>
-        <div class="container">
-          <div class="row">
-            <div class="col-md-2">
-              <img class="rounded-circle float-left" src="{{item.avatar}}" (error)="VM.imageErrorHandler($event, item)"
-                alt="Foto de {{item.nombre}} {{item.apellidos}}" width="75" height="75">
-            </div>
-            <div class="col-md-10">
-              <button type="button" class="btn btn-link btn-lg px-0" (click)="VM.view(item.id)">
-                {{item.tratamiento}} {{item.nombre}} {{item.apellidos}}</button>
-              <br>
-              <b>Tlfn.:</b> {{item.telefono}} <b>Correo:</b> {{item.email}}
-            </div>
-          </div>
-        </div>
+        <button type="button" class="btn btn-link btn-lg px-0" (click)="VM.view(item.idLibro)">
+          {{item.titulo}}</button>
+        <br>
       </td>
       <td class="align-middle text-end">
-        <app-list-buttons (view)="VM.view(item.id)" (edit)="VM.edit(item.id)" (delete)="VM.delete(item.id)"
-          [confirm-delete-message]="'Si se borra el contacto no se podrá recuperar:'" ></app-list-buttons>
+        <app-list-buttons (view)="VM.view(item.idLibro)" (edit)="VM.edit(item.idLibro)"
+          (delete)="VM.delete(item.idLibro)"
+          [confirm-delete-message]="'Si se borra el contacto no se podrá recuperar:'"></app-list-buttons>
         <!-- <div class="btn-group" role="group">
           <button class="btn btn-info" (click)="VM.view(item.id)"><i class="fas fa-eye"></i></button>
           <button class="btn btn-success" (click)="VM.edit(item.id)"><i class="fas fa-pen"></i></button>

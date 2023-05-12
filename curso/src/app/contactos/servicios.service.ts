@@ -112,9 +112,9 @@ export class ContactosViewModelService {
     this.elemento = {};
     this.idOriginal = null;
     // this.list();
-    this.load(this.page)
+    // this.load(this.page)
     // this.router.navigateByUrl(this.listURL);
-    // this.navigation.back()
+    this.navigation.back()
   }
   public send(): void {
     switch (this.modo) {
@@ -142,7 +142,7 @@ export class ContactosViewModelService {
       case 0: msg = err.message; break;
       case 404: msg = `ERROR: ${err.status} ${err.statusText}`; break;
       default:
-        msg = `ERROR: ${err.status} ${err.statusText}.${err.error['title'] ? ` Detalles: ${err.error['title']}` : ''}`
+        msg = `ERROR: ${err.status} ${err.statusText}.${err.error?.['title'] ? ` Detalles: ${err.error['title']}` : ''}`
         break;
     }
     this.notify.add(msg)

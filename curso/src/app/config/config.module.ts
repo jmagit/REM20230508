@@ -17,4 +17,4 @@ const routes: Routes = [
     CommonModule, RouterModule.forChild(routes),
   ]
 })
-export default class ConfigModule { }
+export class ConfigModule { }

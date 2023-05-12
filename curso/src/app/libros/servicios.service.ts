@@ -7,7 +7,18 @@ import { RESTDAOService, ModoCRUD } from '../base-code';
 import { NavigationService, NotificationService } from '../common-services';
 import { AuthService, AUTH_REQUIRED } from '../security';
 
-
+export class Libros {
+  id: number = 0;
+  tratamiento: string | null = null;
+  nombre: string | null = null;
+  apellidos: string | null = null;
+  telefono: string | null = null;
+  email: string | null = null;
+  sexo: string | null = 'H';
+  nacimiento: string | null = null;
+  avatar: string | null = null;
+  conflictivo: boolean = false;
+}
 @Injectable({
   providedIn: 'root'
 })
@@ -101,9 +112,9 @@ export class LibrosViewModelService {
     this.elemento = {};
     this.idOriginal = null;
     // this.list();
-    this.load(this.page)
+    // this.load(this.page)
     // this.router.navigateByUrl(this.listURL);
-    // this.navigation.back()
+    this.navigation.back()
   }
   public send(): void {
     switch (this.modo) {

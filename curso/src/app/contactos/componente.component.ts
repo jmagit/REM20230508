@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @angular-eslint/no-empty-lifecycle-method */
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { ContactosViewModelService } from './servicios.service';
 
@@ -19,6 +19,7 @@ export class ContactosComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void { this.vm.clear(); }
 }
 
+/*
 @Component({
   selector: 'app-contactos-list',
   templateUrl: './tmpl-list.sin-rutas.component.html',
@@ -62,8 +63,8 @@ export class ContactosViewComponent implements OnInit, OnDestroy {
   ngOnInit(): void { }
   ngOnDestroy(): void { }
 }
+*/
 
-/*
 @Component({
   selector: 'app-contactos-list',
   templateUrl: './tmpl-list.con-rutas.component.html',
@@ -120,27 +121,18 @@ export class ContactosEditComponent implements OnInit, OnDestroy {
   templateUrl: './tmpl-view.component.html',
   styleUrls: ['./componente.component.css']
 })
-export class ContactosViewComponent implements OnInit, OnDestroy {
-  private obs$: any;
-  constructor(protected vm: ContactosViewModelService,
-    protected route: ActivatedRoute, protected router: Router) { }
+export class ContactosViewComponent implements OnChanges {
+  @Input() id?: string;
+  constructor(protected vm: ContactosViewModelService, protected router: Router) { }
   public get VM(): ContactosViewModelService { return this.vm; }
-  ngOnInit(): void {
-    this.obs$ = this.route.paramMap.subscribe(
-      (params: ParamMap) => {
-        const id = parseInt(params?.get('id') ?? '');
-        if (id) {
-          this.vm.view(id);
-        } else {
-          this.router.navigate(['/404.html']);
-        }
-      });
-  }
-  ngOnDestroy(): void {
-    this.obs$.unsubscribe();
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this.id) {
+      this.vm.view(+this.id);
+    } else {
+      this.router.navigate(['/404.html']);
+    }
   }
 }
-*/
 
 export const CONTACTOS_COMPONENTES = [
   ContactosComponent, ContactosListComponent, ContactosAddComponent,

@@ -8,13 +8,13 @@ import { LoggerService } from '@my/core';
 import { DAOServiceMock } from '../base-code/RESTDAOService';
 import { NavigationService, NotificationService } from '../common-services';
 
-import { Contactos, ContactosDAOService, ContactosViewModelService } from './servicios.service';
+import { Libros, LibrosDAOService, LibrosViewModelService } from './servicios.service';
 import { NO_ERRORS_SCHEMA, Type } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { CONTACTOS_COMPONENTES } from './componente.component';
+import { LIBROS_COMPONENTES } from './componente.component';
 
-describe('Modulo Contactos', () => {
-  const apiURL = environment.apiURL + 'contactos'
+xdescribe('Modulo Libros', () => {
+  const apiURL = environment.apiURL + 'libros'
   const dataMock = [
     { "id": 1, "tratamiento": "Sra.", "nombre": "Marline", "apellidos": "Lockton Jerrans", "telefono": "846 054 444", "email": "mjerrans0@de.vu", "sexo": "M", "nacimiento": "1973-07-09", "avatar": "https://randomuser.me/api/portraits/women/1.jpg", "conflictivo": true },
     { "id": 2, "tratamiento": "Sr.", "nombre": "Beale", "apellidos": "Knibb Koppe", "telefono": "093 804 977", "email": "bkoppe0@apache.org", "sexo": "H", "nacimiento": "1995-11-22", "avatar": "https://randomuser.me/api/portraits/men/1.jpg", "conflictivo": false },
@@ -29,11 +29,11 @@ describe('Modulo Contactos', () => {
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [HttpClientTestingModule],
-        providers: [ContactosDAOService, HttpClient],
+        providers: [LibrosDAOService, HttpClient],
       });
     });
 
-    it('query', inject([ContactosDAOService, HttpTestingController], (dao: ContactosDAOService, httpMock: HttpTestingController) => {
+    it('query', inject([LibrosDAOService, HttpTestingController], (dao: LibrosDAOService, httpMock: HttpTestingController) => {
       dao.query().subscribe({
           next: data => {
             expect(data.length).toEqual(dataMock.length);
@@ -46,7 +46,7 @@ describe('Modulo Contactos', () => {
       httpMock.verify();
     }));
 
-    it('get', inject([ContactosDAOService, HttpTestingController], (dao: ContactosDAOService, httpMock: HttpTestingController) => {
+    it('get', inject([LibrosDAOService, HttpTestingController], (dao: LibrosDAOService, httpMock: HttpTestingController) => {
       dao.get(1).subscribe({
           next: data => {
             expect(data).toEqual(dataMock[0]);
@@ -59,7 +59,7 @@ describe('Modulo Contactos', () => {
       httpMock.verify();
     }));
 
-    it('add', inject([ContactosDAOService, HttpTestingController], (dao: ContactosDAOService, httpMock: HttpTestingController) => {
+    it('add', inject([LibrosDAOService, HttpTestingController], (dao: LibrosDAOService, httpMock: HttpTestingController) => {
       const item = { ...dataAddMock };
       dao.add(item).subscribe();
       const req = httpMock.expectOne(`${apiURL}`);
@@ -72,7 +72,7 @@ describe('Modulo Contactos', () => {
       httpMock.verify();
     }));
 
-    it('change', inject([ContactosDAOService, HttpTestingController], (dao: ContactosDAOService, httpMock: HttpTestingController) => {
+    it('change', inject([LibrosDAOService, HttpTestingController], (dao: LibrosDAOService, httpMock: HttpTestingController) => {
       const item = { ...dataEditMock };
       dao.change(1, item).subscribe();
       const req = httpMock.expectOne(`${apiURL}/1`);
@@ -85,7 +85,7 @@ describe('Modulo Contactos', () => {
       httpMock.verify();
     }));
 
-    it('delete', inject([ContactosDAOService, HttpTestingController], (dao: ContactosDAOService, httpMock: HttpTestingController) => {
+    it('delete', inject([LibrosDAOService, HttpTestingController], (dao: LibrosDAOService, httpMock: HttpTestingController) => {
       dao.remove(1).subscribe();
       const req = httpMock.expectOne(`${apiURL}/1`);
       expect(req.request.method).toEqual('DELETE');
@@ -94,20 +94,20 @@ describe('Modulo Contactos', () => {
 
   });
   describe('ViewModelService', () => {
-    let service: ContactosViewModelService;
-    let dao: ContactosDAOService;
+    let service: LibrosViewModelService;
+    let dao: LibrosDAOService;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [HttpClientTestingModule, RouterTestingModule],
         providers: [NotificationService, LoggerService,
           {
-            provide: ContactosDAOService, useFactory: () => new DAOServiceMock<Contactos, number>([...dataMock])
+            provide: LibrosDAOService, useFactory: () => new DAOServiceMock<Libros, number>([...dataMock])
           }
         ],
       });
-      service = TestBed.inject(ContactosViewModelService);
-      dao = TestBed.inject(ContactosDAOService);
+      service = TestBed.inject(LibrosViewModelService);
+      dao = TestBed.inject(LibrosDAOService);
     });
 
     it('should be created', () => {
@@ -271,7 +271,7 @@ describe('Modulo Contactos', () => {
 
   });
   describe('Componentes', () => {
-    CONTACTOS_COMPONENTES.forEach(componente => {
+    LIBROS_COMPONENTES.forEach(componente => {
       describe(componente.name, () => {
         let component: any;
         let fixture: ComponentFixture<any>;

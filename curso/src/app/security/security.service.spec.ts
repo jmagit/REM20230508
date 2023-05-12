@@ -1,8 +1,9 @@
 import { HttpClient, HttpContext, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { Component } from '@angular/core';
+import { Location } from '@angular/common';
 import { inject, TestBed } from '@angular/core/testing';
-import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
+import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { LoggerService } from '@my/core';
 import { environment } from 'src/environments/environment';
@@ -369,7 +370,7 @@ describe('AuthGuard', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [TestHomeComponent, TestComponent],
-      providers: [AuthService, Location],
+      providers: [AuthService, Location, ],
       imports: [
         RouterTestingModule.withRoutes(
           [
@@ -393,11 +394,11 @@ describe('AuthGuard', () => {
   it('canActivate', async () => {
     auth.login('token', 'refresh', 'usuario', [])
     expect(router.routerState.snapshot.url).toEqual('');
-    expect(location.pathname).toEqual('');
+    expect(location.path()).toEqual('');
     const navigate = await router.navigateByUrl('/test')
     expect(navigate).toBeTruthy()
     expect(router.routerState.snapshot.url).toEqual('/test');
-    expect(location.pathname).toEqual('/test');
+    expect(location.path()).toEqual('/test');
   });
   it('not canActivate', async () => {
     auth.logout()
