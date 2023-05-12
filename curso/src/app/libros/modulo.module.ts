@@ -28,4 +28,4 @@ import { CommonComponentModule } from '../common-component';
     PaginatorModule, CommonComponentModule, MyCoreModule,
   ]
 })
-export class LibrosModule { }
+export default class LibrosModule { }

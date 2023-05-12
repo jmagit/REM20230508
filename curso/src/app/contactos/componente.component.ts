@@ -121,18 +121,38 @@ export class ContactosEditComponent implements OnInit, OnDestroy {
   templateUrl: './tmpl-view.component.html',
   styleUrls: ['./componente.component.css']
 })
-export class ContactosViewComponent implements OnChanges {
-  @Input() id?: string;
-  constructor(protected vm: ContactosViewModelService, protected router: Router) { }
+export class ContactosViewComponent implements OnInit, OnDestroy {
+  private obs$: any;
+  constructor(protected vm: ContactosViewModelService,
+    protected route: ActivatedRoute, protected router: Router) { }
   public get VM(): ContactosViewModelService { return this.vm; }
-  ngOnChanges(changes: SimpleChanges): void {
-    if (this.id) {
-      this.vm.view(+this.id);
-    } else {
-      this.router.navigate(['/404.html']);
-    }
+  ngOnInit(): void {
+    this.obs$ = this.route.paramMap.subscribe(
+      (params: ParamMap) => {
+        const id = parseInt(params?.get('id') ?? '');
+        if (id) {
+          this.vm.view(id);
+        } else {
+          this.router.navigate(['/404.html']);
+        }
+      });
+  }
+  ngOnDestroy(): void {
+    this.obs$.unsubscribe();
   }
 }
+// export class ContactosViewComponent implements OnChanges {
+//   @Input() id?: string;
+//   constructor(protected vm: ContactosViewModelService, protected router: Router) { }
+//   public get VM(): ContactosViewModelService { return this.vm; }
+//   ngOnChanges(changes: SimpleChanges): void {
+//     if (this.id) {
+//       this.vm.view(+this.id);
+//     } else {
+//       this.router.navigate(['/404.html']);
+//     }
+//   }
+// }
 
 export const CONTACTOS_COMPONENTES = [
   ContactosComponent, ContactosListComponent, ContactosAddComponent,
