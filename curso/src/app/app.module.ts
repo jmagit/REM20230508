@@ -8,7 +8,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AjaxWaitInterceptor, MainModule } from './main';
 import { AuthInterceptor, SecurityModule } from './security';
 import { ERROR_LEVEL, LoggerService, MyCoreModule } from 'src/lib/my-core';
@@ -22,6 +22,8 @@ import { FormularioComponent } from './formulario/formulario.component';
 import { CommonComponentModule } from './common-component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ContactosModule } from './contactos';
+import { FormularioRxComponent } from './formulario-rx/formulario-rx.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -30,9 +32,11 @@ import { ContactosModule } from './contactos';
     DinamicoComponent,
     CalculadoraComponent,
     FormularioComponent,
+    FormularioRxComponent,
+    DashboardComponent,
   ],
   imports: [
-    BrowserModule, FormsModule, HttpClientModule,
+    BrowserModule, FormsModule, ReactiveFormsModule, HttpClientModule,
     AppRoutingModule, MainModule, SecurityModule, MyCoreModule, CommonServicesModule, CommonComponentModule,
     ContactosModule,
     GraficoSvgComponent

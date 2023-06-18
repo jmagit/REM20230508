@@ -1,7 +1,11 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Injector, OnDestroy, OnInit, Signal, WritableSignal, computed, effect, signal } from '@angular/core';
 import { NotificationService, NotificationType } from '../common-services';
 import { Unsubscribable } from 'rxjs';
 
+interface Provincia {
+  id: number,
+  nombre: string,
+}
 @Component({
   selector: 'app-demos',
   templateUrl: './demos.component.html',
@@ -26,7 +30,7 @@ export class DemosComponent implements OnInit, OnDestroy {
 
   fontSize = 24;
 
-  constructor(public vm: NotificationService) { }
+  constructor(public vm: NotificationService, private injector: Injector) { }
 
   public get Nombre(): string { return this.nombre }
   public set Nombre(value: string) {
@@ -88,4 +92,28 @@ export class DemosComponent implements OnInit, OnDestroy {
     });
   }
 
+  count: WritableSignal<number> = signal(0);
+  doubleCount: Signal<number> = computed(() => this.count() * 2);
+  doubleDoubleCount: Signal<number> = computed(() => this.doubleCount() * 2);
+  prov = signal({ id: 1, nombre: 'Madrid' }, { equal: (a, b) => a.id === b.id })
+
+  init() {
+    this.count = signal(0);
+    this.doubleCount = computed(() => this.count() * 2);
+    effect(() => {
+      console.log(`The current count is: ${this.count()}`);
+    }, {injector: this.injector});
+  }
+
+  reset() {
+    this.count.set(0)
+    this.prov.set({ id: 1, nombre: 'Madrid' })
+  }
+  up() {
+    this.count.update(old => old + 1)
+    this.prov.mutate(item => { item.nombre = item.nombre + 'x' })
+  }
+  down() {
+    this.count.update(old => old - 1)
+  }
 }

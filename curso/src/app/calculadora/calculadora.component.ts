@@ -3,6 +3,7 @@ import { LoggerService } from '@my/core';
 import { NotificationService, NotificationType } from '../common-services';
 import { environment } from 'src/environments/environment';
 import { OnChanges } from '@angular/core';
+import { fromEvent } from 'rxjs';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -147,6 +148,11 @@ export class CalculadoraComponent implements OnInit, OnChanges {
       this.ponOperando(this.init.toString());
     }
   }
+
+  // teclado = fromEvent(document, 'keydown').subscribe({next: ev => this.handleKeyDown(ev as KeyboardEvent)})
+  // ngOnDestroy() {
+  //   this.teclado.unsubscribe()
+  // }
 
   handleKeyDown(ev: KeyboardEvent) {
     if ('0' <= ev.key && ev.key <= '9')

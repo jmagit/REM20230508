@@ -1,4 +1,15 @@
 <app-notification />
+<div>
+  <button (click)="down()">-</button>
+  <button (click)="up()">+</button>
+  <output>{{count()}}</output>
+  <button (click)="init()">init</button>
+  <button (click)="reset()">reset</button>
+  <output [textContent]="doubleCount()" ></output>
+  <output> | {{doubleDoubleCount()}}</output>
+  <output> | {{prov() | json}}</output>
+</div>
+
 <div class="container theme-dark">
   <div class="row">
     <div class="col">
@@ -69,15 +80,15 @@ Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis itaque placeat 
   </li>
 </ul>
 
-<p>
-  <select [(ngModel)]="idProvincia" >
+<form  #f="ngForm">
+  <select name="idProvincia" ngModel >
     <option value="">--Elige opción--</option>
     <option *ngFor="let p of listado" [value]="p.id">{{p.nombre | capitalize}}</option>
   </select>
   Seleccionada: {{idProvincia}}
   <input type="text" value="Tabarnia" #txtProvincia />
   <input type="button" value="nueva" (click)="add(txtProvincia.value)">
-</p>
+</form>
 <p>
   <input type="date" [(ngModel)]="fecha">
   a: {{fecha}}

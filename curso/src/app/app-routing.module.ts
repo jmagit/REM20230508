@@ -8,6 +8,7 @@ import GraficoSvgComponent from './grafico-svg/grafico-svg.component';
 import { PageNotFoundComponent } from './main';
 import { HomeComponent } from './main/home/home.component';
 import { AuthGuard, AuthService, InRoleGuard, LoginFormComponent, RegisterUserComponent } from './security';
+import { FormularioRxComponent } from './formulario-rx/formulario-rx.component';
 
 export function svgFiles(url: UrlSegment[]) {
   return url.length === 1 && url[0].path.endsWith('.svg') ? ({consumed: url}) : null;
@@ -35,6 +36,7 @@ const routes: Routes = [
   { path: 'login', component: LoginFormComponent },
   { path: 'registro', component: RegisterUserComponent },
   { path: 'config',  loadChildren: () => import('./config/config.module').then(mod => mod.ConfigModule)},
+  { path: 'fx', component: FormularioRxComponent },
 
   { matcher: svgFiles, component: GraficoSvgComponent},
   { path: '404.html', component: PageNotFoundComponent },
