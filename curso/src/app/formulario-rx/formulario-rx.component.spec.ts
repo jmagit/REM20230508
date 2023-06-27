@@ -1,21 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { Spectator, byValue, createComponentFactory } from '@ngneat/spectator';
 import { FormularioRxComponent } from './formulario-rx.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 describe('FormularioRxComponent', () => {
-  let component: FormularioRxComponent;
-  let fixture: ComponentFixture<FormularioRxComponent>;
+  let spectator: Spectator<FormularioRxComponent>;
+  const createComponent = createComponentFactory({ component: FormularioRxComponent, imports: [ReactiveFormsModule]});
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      declarations: [FormularioRxComponent]
-    });
-    fixture = TestBed.createComponent(FormularioRxComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
+  beforeEach(() => spectator = createComponent());
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(spectator.component).toBeTruthy();
+  });
+  it('should ', () => {
+    expect(spectator.query(byValue('Send'))).toBeDefined();
   });
 });
